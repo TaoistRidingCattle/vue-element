@@ -5,6 +5,19 @@ import store from './store'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/style/util.css'
+import '@/style/iconfont/iconfont.css'
+
+Vue.config.productionTip = false
+Vue.use(ElementUi)
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+
+
+
+
 // import axios from 'axios'
 // Vue.prototype.$http = axios
 // axios.defaults.baseURL = 'http://127.0.0.1:3000/'
@@ -19,10 +32,3 @@ import '@/style/util.css'
 //   // 对请求错误做些什么
 //   return Promise.reject(error);
 // });
-Vue.config.productionTip = false
-Vue.use(ElementUi)
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')

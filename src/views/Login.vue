@@ -60,8 +60,8 @@ export default {
     return {
       active: false,
       loginForm: {
-        name: "",
-        password: "",
+        name: "admin",
+        password: "adminadmin",
       },
       loginRules: {
         name: [
@@ -101,7 +101,7 @@ export default {
                   type: "success",
                 });
                 setTimeout(() => {
-                  this.$router.push("/");
+                  this.$router.push("/home");
                 }, 2000);
               } else {
                 this.$message({
