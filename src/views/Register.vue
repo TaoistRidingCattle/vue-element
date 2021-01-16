@@ -91,7 +91,7 @@ export default {
       }
     };
     var validateName = async (rule, value, callback) => {
-      let status = await request.get("/register?name=" + value);
+      let status = await this.$http.get("/register?name=" + value);
       console.log(status.data.code);
       if (status.data.code === 200) {
         callback();
@@ -136,9 +136,9 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.checked) {
-            request
-              .post("/register", {
-                ...this.loginForm
+            
+              this.$http.post("/register", {
+                ...this.registerForm
               })
               .then((res) => {
                 if (res.data.code === 200) {

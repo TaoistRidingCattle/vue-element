@@ -1,16 +1,12 @@
 <template>
   <el-container class="body">
     <el-main class="main shadow">
-      <div class="text-center font-22 font-weight-bold text-muted" >
-        <router-link
-          to="/login"
-          class="head router-link-active"
+      <div class="text-center font-22 font-weight-bold text-muted">
+        <router-link to="/login" class="head router-link-active"
           >登录</router-link
         >
-        <span class="mx-2 " style="color:#999;">·</span>
-        <router-link  to="/register" class="head"
-          >注册</router-link
-        >
+        <span class="mx-2" style="color: #999">·</span>
+        <router-link to="/register" class="head">注册</router-link>
       </div>
       <el-form
         ref="loginForm"
@@ -23,7 +19,7 @@
           <el-input
             v-model="loginForm.name"
             placeholder="请输入用户名"
-            prefix-icon = "el-icon-user-solid"
+            prefix-icon="el-icon-user-solid"
           ></el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -31,7 +27,7 @@
             v-model="loginForm.password"
             placeholder="请输入密码"
             type="password"
-            prefix-icon = "el-icon-lock"
+            prefix-icon="el-icon-lock"
             show-password
           ></el-input>
         </el-form-item>
@@ -61,7 +57,7 @@ export default {
       active: false,
       loginForm: {
         name: "admin",
-        password: "adminadmin",
+        password: "123123",
       },
       loginRules: {
         name: [
@@ -91,11 +87,12 @@ export default {
         if (valid) {
           request
             .post("/login", {
-              ...this.loginForm
+              ...this.loginForm,
             })
             .then(async (res) => {
               if (res.data.code == 200) {
-                window.sessionStorage.setItem("token", res.config.data);
+                window.localStorage.setItem("token", res.data.token);
+                window.localStorage.setItem("name", this.loginForm.name);
                 this.$message({
                   message: res.data.msg,
                   type: "success",
@@ -140,10 +137,10 @@ export default {
     letter-spacing: 4px;
     user-select: none;
     cursor: pointer;
-    color:#999;
+    color: #999;
   }
-    a.router-link-active{
-      color:red;
-    }
+  a.router-link-active {
+    color: red;
+  }
 }
 </style>

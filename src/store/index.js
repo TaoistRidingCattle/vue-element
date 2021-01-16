@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -53,11 +52,34 @@ export default new Vuex.Store({
         icon:'el-icon-s-comment',
         path:'/selfsetting'
       }
-    ]
+    ],
+    articleList:[],
+    num: 0
+    
   },
   mutations: {
+    getArticleList(state,value){
+      state.articleList = value
+      state.num = value.length
+    },
+    add(state,value){
+      state.articleList.push({
+        id:value.id,
+        title:value.title,
+        content:value.content
+      })
+    },
+    handleEdit(state,value) {
+      
+    },
+    handleDelete(state, value) {
+      state.articleList.splice(value.index,1)
+    },
   },
   actions: {
+    axiosGetArticle(state,value){
+      state.commit('getArticleList',value)
+    }
   },
   modules: {
   }
