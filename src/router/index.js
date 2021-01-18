@@ -24,6 +24,11 @@ const routes = [{
         component: () => import('../components/Article.vue')
       },
       {
+        path: '/editArticle/:id',
+        name: 'editArticlePage',
+        component: () => import('../components/EditArticle.vue')
+      },
+      {
         path: '/createArticle',
         name: 'createArticlePage',
         component: () => import('../components/CreateArticle.vue')
@@ -52,6 +57,11 @@ const routes = [{
         path: '/selfsetting',
         name: 'selfSettingPage',
         component: () => import('../components/SelfSetting.vue')
+      },
+      {
+        path: '*',
+        name: 'NoFondPage',
+        component: () => import('../components/NoFound.vue')
       }
     ]
   },
@@ -86,12 +96,9 @@ const routes = [{
     component: () => import('../views/Register.vue')
   },
   {
-    path: '*',
-    name: 'NoFondPage',
-    component: () => import('../components/NoFound.vue')
+    path: '/',
+    redirect:'/home'
   }
-
-
 ]
 
 const router = new VueRouter({

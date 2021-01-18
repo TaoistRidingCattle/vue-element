@@ -58,28 +58,8 @@ export default new Vuex.Store({
     
   },
   mutations: {
-    getArticleList(state,value){
-      state.articleList = value
-      state.num = value.length
-    },
-    add(state,value){
-      state.articleList.push({
-        id:value.id,
-        title:value.title,
-        content:value.content
-      })
-    },
-    handleEdit(state,value) {
-      
-    },
-    handleDelete(state, value) {
-      state.articleList.splice(value.index,1)
-    },
   },
   actions: {
-    axiosGetArticle(state,value){
-      state.commit('getArticleList',value)
-    }
   },
   modules: {
   }

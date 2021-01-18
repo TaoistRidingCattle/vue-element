@@ -51,6 +51,7 @@
 
 <script>
 import request from "@/api/request.js";
+
 export default {
   data() {
     return {
@@ -112,7 +113,8 @@ export default {
         }
       });
     },
-  }
+  },
+  
 };
 </script>
 

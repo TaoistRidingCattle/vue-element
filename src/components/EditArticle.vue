@@ -1,13 +1,13 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="80px" :rules="rules">
+    <el-form :model="form" label-width="80px" ref="form" :rules="rules">
       <el-form-item label="文章标题" prop="title">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
-      <el-form-item label="文章内容" prop="content">
+      <el-form-item label="文章内容"  prop="content">
         <el-tiptap v-model="form.content" :extensions="extensions" />
       </el-form-item>
-      <el-form-item label="时间" prop ="date">
+      <el-form-item label="时间"  prop="date">
         <el-date-picker v-model="form.date" type="date" placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
@@ -67,7 +67,7 @@ export default {
       form: {
         title: "",
         content: "",
-        date: ''
+        date:''
       },
       rules: {
         title: [{ required: true, message: "请输入标题", trigger: "blur" }],
@@ -123,20 +123,24 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$http
-            .post("/createArticle", {
+            .post("/editArticle", {
+              id: this.$route.params.id,
               title: this.form.title,
               content: this.form.content,
-              date: this.form.date
+              date:this.form.date
             })
             .then((res) => {
-              this.$message({
-                message: "添加成功",
-                type: "success",
-              });
+              if (res.data.code == 200) {
+                this.$message({
+                  message: "修改成功",
+                  type: "success",
+                });
+                this.$router.back();
+              }
             });
           this.form.title = "";
           this.form.content = "";
-          this.form.date= '';
+          this.form.date =''
         } else {
           return false;
         }
@@ -144,6 +148,17 @@ export default {
     },
   },
   computed: {},
+  created() {
+    this.$http
+      .post("/editArticle", {
+        id: this.$route.params.id,
+      })
+      .then((res) => {
+        this.form.title = res.data.editData[0].title;
+        this.form.content = res.data.editData[0].content;
+        this.form.date = res.data.editData[0].date;
+      });
+  },
 };
 </script>
 
